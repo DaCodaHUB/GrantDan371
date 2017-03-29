@@ -1,0 +1,76 @@
+module DFlipFlop(q, qBar, D, clk, rst);
+	input D, clk, rst;
+	output q, qBar;
+	reg q;
+	not n1 (qBar, q);
+	
+	always@ (negedge rst or posedge clk)
+		begin
+			if(!rst)
+				q = 0;
+			else
+				q = D;
+		end
+endmodule
+
+
+
+module RippleDownCount (clk, out, rst); 'ripple down counter
+	input clk, rst;
+	output [3:0]out;
+	logic [3:0]notOut;
+	
+	DFlipFlop out0 (.D(notOut[0]), .clk, .rst, .q(out[0]), .qBar(notOut[0]));
+	DFlipFlop out1 (.D(notOut[1]), .clk(~out[0]), .rst, .q(out[1]), .qBar(notOut[1]));
+	DFlipFlop out2 (.D(notOut[2]), .clk(~out[1]), .rst, .q(out[2]), .qBar(notOut[2]));
+	DFlipFlop out3 (.D(notOut[3]), .clk(~out[2]), .rst, .q(out[3]), .qBar(notOut[3]));
+	
+endmodule
+
+/*module SyncUpCountSchematic (q, out, clk, rst); 'Synchronous up counter dataflow entry
+	input clk, rst;
+	output [3:0]out;
+	logic [3:0]notOut;
+	
+	DFlipFlop out0 (.D(1'b1), .clk, .rst, .q(out[0]));
+	DFlipFlop out1 (.D(out[0]), .clk, .rst, .q(out[1]));
+	DFlipFlop out2 (.D(out[0] && out[1]), .clk, .rst, .q(out[2]));
+	DFlipFlop out3 (.D(out[1] && out[2]), .clk, .rst, .q(out[3]));
+	
+endmodule*/
+
+module SyncUpCountSchematic (out, clk, rst); 'Synchronous up counter dataflow entry
+	input clk, rst;
+	output [3:0]out;
+	reg [3:0] Q; 
+	
+	DFlipFlop out0 (.D(~Q[0]), .clk, .rst, .q(Q[0]), .qBar(~Q[0]));
+	DFlipFlop out1 (.D(Q[0] ^ Q[1]), .clk, .rst, .q(Q[1]), .qBar(~Q[1]));
+	DFlipFlop out2 (.D((Q[0] & Q[1]) ^ Q[2]), .clk, .rst, .q(Q[2]), .qBar(~Q[2]));
+	DFlipFlop out3 (.D((Q[0] & Q[1] & Q[2]) ^ Q[3]), .clk, .rst, .q(Q[3]), .qBar(~Q[3]));
+
+	assign out = Q;	
+endmodule
+
+module JohnsonCount (out, clk, rst); 'Synchronous Johnson Counter
+	input clk, rst;
+	output [3:0]out;
+	
+	enum{0, 1, 2, 3 ,4 , 5, 6, 7} ps, ns;
+		always_comb begin
+			0: begin ns = 1; out = 4'b0000; end
+			1: begin ns = 2; out = 4'b0001; end
+			2: begin ns = 3; out = 4'b0011; end
+			3: begin ns = 4; out = 4'b0111; end
+			4: begin ns = 5; out = 4'b1111; end
+			5: begin ns = 6; out = 4'b1110; end
+			6: begin ns = 7; out = 4'b1100; end
+			7: begin ns = 0; out = 4'b1000; end
+		end
+	
+	always_ff @(posedge clk)
+		if (rst)
+			ps <= 0;
+		else
+			ps <= ns;
+endmodule
