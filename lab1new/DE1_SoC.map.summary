@@ -1,7 +1,7 @@
-Analysis & Elaboration Status : Failed - Fri Apr 14 02:45:30 2017
+Analysis & Elaboration Status : Successful - Fri Apr 14 02:47:31 2017
 Quartus Prime Version : 16.0.0 Build 211 04/27/2016 SJ Lite Edition
 Revision Name : DE1_SoC
-Top-level Entity Name : DE1_SoC
+Top-level Entity Name : DFlipFlop
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A until Partition Merge
 Total registers : N/A until Partition Merge

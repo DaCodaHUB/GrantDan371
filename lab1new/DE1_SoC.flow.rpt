@@ -1,5 +1,5 @@
 Flow report for DE1_SoC
-Fri Apr 14 02:45:30 2017
+Fri Apr 14 02:47:31 2017
 Quartus Prime Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
 
 
@@ -41,12 +41,12 @@ agreement for further details.
 +---------------------------------------------------------------------------+
 ; Flow Summary                                                              ;
 +-----------------------------+---------------------------------------------+
-; Flow Status                 ; Flow Failed - Fri Apr 14 02:45:30 2017      ;
+; Flow Status                 ; Successful - Fri Apr 14 02:47:31 2017       ;
 ; Quartus Prime Version       ; 16.0.0 Build 211 04/27/2016 SJ Lite Edition ;
 ; Revision Name               ; DE1_SoC                                     ;
-; Top-level Entity Name       ; DE1_SoC                                     ;
+; Top-level Entity Name       ; DFlipFlop                                   ;
 ; Family                      ; Cyclone V                                   ;
-; Device                      ; 5CSEMA5F31C6                                ;
+; Device                      ; 5CGXFC7C7F23C8                              ;
 ; Timing Models               ; Final                                       ;
 ; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
 ; Total registers             ; N/A until Partition Merge                   ;
@@ -63,30 +63,23 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/14/2017 02:45:20 ;
+; Start date & time ; 04/14/2017 02:47:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE1_SoC             ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                           ;
-+-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
-+-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 171921335570231.149216312005976       ; --            ; --          ; --             ;
-; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                     ; --            ; --          ; eda_simulation ;
-; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)       ; <None>        ; --          ; --             ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --             ;
-; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top            ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top            ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --             ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --             ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                          ; --            ; --          ; --             ;
-; STATE_MACHINE_PROCESSING            ; User-Encoded                          ; Auto          ; --          ; --             ;
-+-------------------------------------+---------------------------------------+---------------+-------------+----------------+
++------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                 ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                           ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 171921335570231.149216324206148 ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                        ; --            ; DFlipFlop   ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING           ; --            ; DFlipFlop   ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                          ; --            ; DFlipFlop   ; Top        ;
+; TOP_LEVEL_ENTITY                    ; DFlipFlop                       ; DE1_SoC       ; --          ; --         ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
@@ -94,8 +87,8 @@ agreement for further details.
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name            ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Elaboration ; 00:00:10     ; 1.0                     ; 866 MB              ; 00:00:23                           ;
-; Total                  ; 00:00:10     ; --                      ; --                  ; 00:00:23                           ;
+; Analysis & Elaboration ; 00:00:09     ; 1.0                     ; 867 MB              ; 00:00:23                           ;
+; Total                  ; 00:00:09     ; --                      ; --                  ; 00:00:23                           ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

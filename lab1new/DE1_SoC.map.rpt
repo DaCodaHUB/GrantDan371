@@ -1,5 +1,5 @@
 Analysis & Elaboration report for DE1_SoC
-Fri Apr 14 02:45:30 2017
+Fri Apr 14 02:47:31 2017
 Quartus Prime Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
 
 
@@ -37,10 +37,10 @@ agreement for further details.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Failed - Fri Apr 14 02:45:30 2017           ;
+; Analysis & Elaboration Status ; Successful - Fri Apr 14 02:47:31 2017       ;
 ; Quartus Prime Version         ; 16.0.0 Build 211 04/27/2016 SJ Lite Edition ;
 ; Revision Name                 ; DE1_SoC                                     ;
-; Top-level Entity Name         ; DE1_SoC                                     ;
+; Top-level Entity Name         ; DFlipFlop                                   ;
 ; Family                        ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
 ; Total registers               ; N/A until Partition Merge                   ;
@@ -73,10 +73,9 @@ agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; DE1_SoC            ; DE1_SoC            ;
+; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
+; Top-level entity name                                                           ; DFlipFlop          ; DE1_SoC            ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
-; State Machine Processing                                                        ; User-Encoded       ; Auto               ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
 ; Enable compact report table                                                     ; Off                ; Off                ;
@@ -87,6 +86,7 @@ agreement for further details.
 ; Disable OpenCore Plus hardware evaluation                                       ; Off                ; Off                ;
 ; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
 ; Safe State Machine                                                              ; Off                ; Off                ;
 ; Extract Verilog State Machines                                                  ; On                 ; On                 ;
 ; Extract VHDL State Machines                                                     ; On                 ; On                 ;
@@ -162,18 +162,18 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
-    Info: Processing started: Fri Apr 14 02:45:20 2017
+    Info: Processing started: Fri Apr 14 02:47:22 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC --analysis_and_elaboration
-Info (125069): Default assignment values were changed in the current version of the Quartus Prime software -- changes to default assignments values are contained in file c:/altera_lite/16.0/quartus/bin64/assignment_defaults.qdf
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Error (10170): Verilog HDL syntax error at DE1_SoC.sv(20) near text: "end"; "end" without "begin" . Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Altera Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Grant/Documents/UW/EE371/lab1/DE1_SoC.sv Line: 20
-Error (10112): Ignored design unit "dff" at DE1_SoC.sv(8) due to previous errors File: C:/Users/Grant/Documents/UW/EE371/lab1/DE1_SoC.sv Line: 8
-Info (12021): Found 0 design units, including 0 entities, in source file de1_soc.sv
-Error: Quartus Prime Analysis & Elaboration was unsuccessful. 2 errors, 1 warning
-    Error: Peak virtual memory: 866 megabytes
-    Error: Processing ended: Fri Apr 14 02:45:30 2017
-    Error: Elapsed time: 00:00:10
-    Error: Total CPU time (on all processors): 00:00:23
+Info (12021): Found 2 design units, including 2 entities, in source file dflipflop.sv
+    Info (12023): Found entity 1: DFlipFlop File: C:/Users/Grant/Documents/UW/EE371/lab1/DFlipFlop.sv Line: 8
+    Info (12023): Found entity 2: DFF_testbench File: C:/Users/Grant/Documents/UW/EE371/lab1/DFlipFlop.sv Line: 25
+Info (12127): Elaborating entity "DFlipFlop" for the top level hierarchy
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 867 megabytes
+    Info: Processing ended: Fri Apr 14 02:47:31 2017
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:23
 
 
