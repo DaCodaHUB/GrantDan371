@@ -1,0 +1,124 @@
+# Reading C:/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl 
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFF
+# ** Error: ./DFF.sv(16): (vlog-2730) Undefined variable: 'reset'.
+# 
+# ** Error: ./DFF.sv(19): (vlog-2730) Undefined variable: 'q'.
+# 
+# ** Error: ./DFF.sv(20): near "end": syntax error, unexpected end
+# ** Error: ./DFF.sv(26): 'd' already declared in this scope (DFF).
+# ** Error: ./DFF.sv(26): 'f' already declared in this scope (DFF).
+# ** Error: ./DFF.sv(26): 'clk' already declared in this scope (DFF).
+# ** Error: ./DFF.sv(10): Identifier must be declared with a port mode: q.
+# ** Error: C:/altera/14.0/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./runlab.do line 7
+# C:/altera/14.0/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog "./DFF.sv""
+do runlab.dob
+# Cannot open macro file: runlab.dob
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps DFF_testbench 
+# Loading sv_std.std
+# Loading work.DFF_testbench
+# Loading work.DFlipFlop
+# ** Error: (vsim-3839) ./DFlipFlop.sv(29): Variable '/DFF_testbench/q', driven via a port connection, is multiply driven. See ./DFlipFlop.sv(45).
+# 
+#         Region: /DFF_testbench/dflip
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./runlab.do PAUSED at line 12
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps DFF_testbench 
+# Loading sv_std.std
+# Loading work.DFF_testbench
+# Loading work.DFlipFlop
+# ** Error: Cannot open macro file: DFF.do
+# Error in macro ./runlab.do line 17
+# Cannot open macro file: DFF.do
+#     while executing
+# "do DFF.do"
+add wave -position end  sim:/DFF_testbench/CLOCK_PERIOD
+add wave -position end  sim:/DFF_testbench/d
+add wave -position end  sim:/DFF_testbench/q
+add wave -position end  sim:/DFF_testbench/reset
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf C:/Users/Grant/Documents/UW/EE371/lab1/dff.do
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps DFF_testbench 
+# Loading sv_std.std
+# Loading work.DFF_testbench
+# Loading work.DFlipFlop
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# Break in Module DFF_testbench at ./DFlipFlop.sv line 47
+# Simulation Breakpoint: Break in Module DFF_testbench at ./DFlipFlop.sv line 47
+# MACRO ./runlab.do PAUSED at line 25
+do runlab.dob
+# Cannot open macro file: runlab.dob
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps DFF_testbench 
+# Loading sv_std.std
+# Loading work.DFF_testbench
+# Loading work.DFlipFlop
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# Break in Module DFF_testbench at ./DFlipFlop.sv line 47
+# Simulation Breakpoint: Break in Module DFF_testbench at ./DFlipFlop.sv line 47
+# MACRO ./runlab.do PAUSED at line 25
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps DFF_testbench 
+# Loading sv_std.std
+# Loading work.DFF_testbench
+# Loading work.DFlipFlop
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# Break in Module DFF_testbench at ./DFlipFlop.sv line 49
+# Simulation Breakpoint: Break in Module DFF_testbench at ./DFlipFlop.sv line 49
+# MACRO ./runlab.do PAUSED at line 25

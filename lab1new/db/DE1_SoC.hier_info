@@ -1,0 +1,7 @@
+|DFlipFlop
+d => q.DATAA
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+reset => q.OUTPUTSELECT
+clk => q~reg0.CLK
+
+
