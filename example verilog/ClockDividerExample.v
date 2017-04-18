@@ -23,8 +23,8 @@ SW);
 
 endmodule
 
-// divided_clocks[0] = 25MHz, [1] = 12.5Mhz, ... [23] = 3Hz, [24] = 1.5Hz,
-[25] = 0.75Hz, ...
+// divided_clocks[0] = 25MHz, [1] = 12.5Mhz, ... [23] = 3Hz, [24] = 1.5Hz,[25] = 0.75Hz, ...
+//NOTE: whichClock = 25 results in a clock with a period of about a second!!!!
 module clock_divider (clock, divided_clocks);
  input logic clock;
  output logic [31:0] divided_clocks;
