@@ -1,0 +1,8 @@
+module SynchUpCounter (CLOCK_50, KEY, LEDR);
+	input logic CLOCK_50;
+	input logic [3:0]KEY;
+	output logic [3:0]LEDR;
+	
+	
+	
+endmodule

@@ -1,3 +1,4 @@
+
 #**************************************************************
 # Altera DE1-SoC SDC settings
 # Users are recommended to modify this file to match users logic.
