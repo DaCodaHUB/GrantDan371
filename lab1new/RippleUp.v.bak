@@ -1,0 +1,23 @@
+module rippleCounter (Clk, Reset, in, out);
+	input Clk, Reset, in;
+	output [3:0] out;
+	wire [3:0] qBar, [3:0] q;
+	
+	DqBarFlipFlop(out[0], qBar[0], 0, Clk, Reset);
+	DqBarFlipFlop(out[1], qBar[1], qBar[0], out[0], Reset);
+	DqBarFlipFlop(out[2], qBar[2], qBar[1], out[1], Reset);
+	DqBarFlipFlop(out[3], qBar[3], qBar[2], out[2], Reset);
+endmodule
+
+module DqBarFlipFlop(q, qBar, D, clk, rst);
+	input D, clk, rst;
+	output q, qBar;
+	reg q;
+	not n1 (qBar, q);
+	always@ (negedge rst or posedge clk) begin
+		if(!rst)
+			q = 0;
+		else
+			q = D;
+	end
+endmodule
