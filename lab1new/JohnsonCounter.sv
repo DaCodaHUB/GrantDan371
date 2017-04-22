@@ -1,40 +1,41 @@
-module SynchUpCounter (CLOCK_50, KEY, LEDR);
+module JohnsonCounter (CLOCK_50, KEY, LEDR);
 	input logic CLOCK_50;
 	input logic [3:0]KEY;
 	output logic [3:0]LEDR;
 	
 	logic [31:0] clk;
-	logic [3:0] out, dffIn, tIn;
-	logic tOut1, tOut2;
+	logic reset;
+	logic [3:0]out;
+	
+	assign reset = ~KEY[0];
+	assign LEDR = out;
 
 	//Clock setup
-	parameter whichClock = 24;
-	clock_divider cdiv (CLOCK_50, clk);
+	parameter whichClock = 0;
+	clock_divider cdiv1 (CLOCK_50, clk);
 	
-	assign LEDR = out;
-	assign tIn[0] = ~out[0];
-	assign tIn[1] = (out[0]&~out[1])|(~out[0]&out[1]);
-	
-	assign dffIn[0] = tIn[0];
-	assign dffIn[1] = tIn[1];
-	assign tOut1 = out[1] & out[0];
-	assign dffIn[2] = (tOut1&~out[2])|(~tOut1&out[2]);
-	assign tOut2 = out[2] & tOut1;
-	assign dffIn[3] = (tOut2&~out[3])|(~tOut2&out[3]);
-		
-	DFlipFlop dflip0 (.d(dffIn[0]), .q(out[0]), .reset(~KEY[0]), .clk(clk[whichClock]));
-	DFlipFlop dflip1 (.d(dffIn[1]), .q(out[1]), .reset(~KEY[0]), .clk(clk[whichClock]));
-	DFlipFlop dflip2 (.d(dffIn[2]), .q(out[2]), .reset(~KEY[0]), .clk(clk[whichClock]));
-	DFlipFlop dflip3 (.d(dffIn[3]), .q(out[3]), .reset(~KEY[0]), .clk(clk[whichClock]));
+	always_ff @ (posedge CLOCK_50)
+		if (reset)
+			out <= 4'b0000;
+		else begin
+			if (out == 4'b0000) out <= 4'b1000;
+			if (out == 4'b1000) out <= 4'b1100;
+			if (out == 4'b1100) out <= 4'b1110;
+			if (out == 4'b1110) out <= 4'b1111;
+			if (out == 4'b1111) out <= 4'b0111;
+			if (out == 4'b0111) out <= 4'b0011;
+			if (out == 4'b0011) out <= 4'b0001;
+			if (out == 4'b0001) out <= 4'b0000;
+		end
 	
 endmodule
 
-module SynchUpCounter_testbench();
+module JohnsonCounter_testbench();
 
 	logic clk; 
 	logic [3:0]KEY, LEDR;
 
-	SynchUpCounter dut (.CLOCK_50(clk), .KEY, .LEDR);
+	JohnsonCounter dut (.CLOCK_50(clk), .KEY, .LEDR);
 
 // Set up the clock.
 	parameter CLOCK_PERIOD=100;
@@ -62,8 +63,8 @@ module SynchUpCounter_testbench();
 									@(posedge clk);
 									@(posedge clk);
 									@(posedge clk);
-									@(posedge clk);
-									@(posedge clk);
+		KEY[0] <= 0; 			@(posedge clk);
+		KEY[0] <= 1; 			@(posedge clk);
 									@(posedge clk);
 									@(posedge clk);
 									@(posedge clk);
