@@ -1,0 +1,117 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\Grant\Documents\UW\EE271\Lab 1
+vclock_divider
+Z1 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+Z2 !s100 Nc]RK>l9h>MGleA;[XjhB2
+Z3 I5?Kac=a8SK:fmg4J1[MWQ3
+Z4 VOah_G=g>Yl`Ki;U<FDXRH1
+Z5 !s105 clock_divider_sv_unit
+S1
+Z6 dC:\Users\Grant\Documents\UW\EE371\lab2
+Z7 w1492756732
+Z8 8./clock_divider.sv
+Z9 F./clock_divider.sv
+L0 1
+Z10 OV;L;10.1e;51
+r1
+31
+Z11 !s90 -reportprogress|300|./clock_divider.sv|
+o-O0
+!i10b 1
+!s85 0
+Z12 !s108 1493541096.068000
+Z13 !s107 ./clock_divider.sv|
+!s101 -O0
+vmux2_1
+R1
+!i10b 1
+Z14 !s100 Ka[eCT>e5JSCn]Pak?zEb1
+Z15 IU:eN[<:@RKeUT:kRe69RK3
+Z16 Vf><WiVR?nHT?C@g0NF=0W2
+Z17 !s105 mux2_1_sv_unit
+S1
+R6
+Z18 w1493540586
+Z19 8./mux2_1.sv
+Z20 F./mux2_1.sv
+L0 1
+R10
+r1
+!s85 0
+31
+Z21 !s108 1493541096.132000
+Z22 !s107 ./mux2_1.sv|
+Z23 !s90 -reportprogress|300|./mux2_1.sv|
+!s101 -O0
+o-O0
+vmux2_1_testbench
+R1
+!i10b 1
+Z24 !s100 S5IabgAYz<=DA;8b`Q1dg0
+Z25 I_2njhWiWb=Fc[eHN9_Rk:2
+Z26 Veb]=`Kc4=P>olk?Tl<c;03
+R17
+S1
+R6
+R18
+R19
+R20
+L0 9
+R10
+r1
+!s85 0
+31
+R21
+R22
+R23
+!s101 -O0
+o-O0
+vPound
+R1
+Z27 In3zPn7znE3:QTW2d@V2o;3
+Z28 V>96bS@:5_Jn0zfNOn1`NX0
+Z29 !s105 Pound_sv_unit
+S1
+R6
+Z30 w1493541083
+Z31 8./Pound.sv
+Z32 F./Pound.sv
+L0 1
+R10
+r1
+31
+Z33 !s108 1493541095.697000
+Z34 !s107 ./Pound.sv|
+Z35 !s90 -reportprogress|300|./Pound.sv|
+o-O0
+Z36 n@pound
+Z37 !s100 b7S=X[2_Z@Y6h3EOnV2cF2
+!i10b 1
+!s85 0
+!s101 -O0
+vPound_Testbench
+R1
+Z38 !s100 7TkVEzLCM=2`kJA2TmHAG1
+Z39 I@2ZD6;[6Mhb1QbQ7@Vc8l3
+Z40 V[3[XzVBBR>;e9XKh@F<zN2
+R29
+S1
+R6
+R30
+R31
+R32
+Z41 L0 267
+R10
+r1
+31
+R33
+R34
+R35
+o-O0
+Z42 n@pound_@testbench
+!i10b 1
+!s85 0
+!s101 -O0
