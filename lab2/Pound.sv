@@ -12,26 +12,24 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 	
 	//reset control
 	logic reset;
+	assign reset = ~KEY[0];
 	
 	//METASTABILITY for user inputs
 	logic METAwaterUp, METAwaterDown, METAarriving, METAdeparting, METAoutsideLock, METAinsideLOCK, METAswitchDirection;
 	
-	DFlipFlop waterUpFF(KEY[1], METAwaterUp, reset, clk[whichClock]);
-	DFlipFlop waterDownFF(KEY[2], METAwaterDown, reset, clk[whichClock]);
-	DFlipFlop arrivingFF(SW[0], METAarriving, reset, clk[whichClock]);
-	DFlipFlop departingFF(SW[1], METAdeparting, reset, clk[whichClock]);
-	DFlipFlop outsideLockFF(SW[2], METAoutsideLock, reset, clk[whichClock]);
-	DFlipFlop insideLockFF(SW[3], METAinsideLock, reset, clk[whichClock]);
-	DFlipFlop switchDirectionFF(SW[4], METAswitchDirection, reset, clk[whichClock]);
+	DFlipFlop waterUpFF(KEY[1], METAwaterUp, reset, CLOCK_50);
+	DFlipFlop waterDownFF(KEY[2], METAwaterDown, reset, CLOCK_50);
+	DFlipFlop arrivingFF(SW[0], METAarriving, reset, CLOCK_50);
+	DFlipFlop departingFF(SW[1], METAdeparting, reset, CLOCK_50);
+	DFlipFlop outsideLockFF(SW[2], METAoutsideLock, reset, CLOCK_50);
+	DFlipFlop insideLockFF(SW[3], METAinsideLock, reset, CLOCK_50);
+	DFlipFlop switchDirectionFF(SW[4], METAswitchDirection, reset, CLOCK_50);
 	
 	//integer values
 	integer waterLevelHeight;
-	
-	//reset declaration
-	assign reset = ~KEY[0];
 
 	//Clock setup
-	parameter whichClock = 19;
+	parameter whichClock = 21;
 	logic [31:0]clk;
 	clock_divider cdiv1 (CLOCK_50, clk);
 	
@@ -133,7 +131,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 	//Additional Counters
 	integer ledFlashCounter;
 		
-	always_ff @(posedge clk[whichClock]) begin
+	always_ff @(posedge CLOCK_50) begin
 		//reset state
 		if (reset) begin //reset to low water state
 			waterLevelHeight <= 0;
@@ -340,18 +338,19 @@ module Pound_Testbench();
 	// Set up the inputs to the design. Each line is a clock cycle.
 	initial begin
 									@(posedge clk);
-		KEY[0] <= 0; 			@(posedge clk);
-		KEY[0] <= 1; 			@(posedge clk);
-		KEY[1] <= 1;			@(posedge clk);
-		SW[1]	<= 1;				@(posedge clk);
-		KEY[2] <= 1;			@(posedge clk);
-									@(posedge clk);
-		SW[0] <= 1;				@(posedge clk);
-		KEY[1] <= 0;			@(posedge clk);
-									@(posedge clk);
-		SW[0]	<= 0;				@(posedge clk);
-									@(posedge clk);
-		SW[3] <= 1;
+		KEY[0] <= 0; 			@(posedge clk);@(posedge clk);@(posedge clk);
+		KEY[0] <= 1; 			@(posedge clk);@(posedge clk);@(posedge clk);
+		KEY[1] <= 1;	SW[0] <= 0;	SW[4] <= 0;	@(posedge clk);@(posedge clk);@(posedge clk);
+		SW <= 10'b0;
+		SW[1]	<= 0;				@(posedge clk);@(posedge clk);@(posedge clk);
+		KEY[2] <= 1;			@(posedge clk);@(posedge clk);@(posedge clk);
+									@(posedge clk);@(posedge clk);@(posedge clk);
+		SW[0] <= 1;				@(posedge clk);@(posedge clk);@(posedge clk);
+		KEY[1] <= 0;			@(posedge clk);@(posedge clk);@(posedge clk);
+									@(posedge clk);@(posedge clk);@(posedge clk);
+		SW[0]	<= 0;				@(posedge clk);@(posedge clk);@(posedge clk);
+									@(posedge clk);@(posedge clk);@(posedge clk);
+		SW[3] <= 1;	@(posedge clk);@(posedge clk);@(posedge clk);
 		for(i = 0; i <480; i++) begin
 			@(posedge clk);
 			if (i == 300)
@@ -361,16 +360,43 @@ module Pound_Testbench();
 		KEY[1] <= 1;						@(posedge clk);
 		SW[3] <= 1;				@(posedge clk);
 									@(posedge clk);
+									@(posedge clk);
+									@(posedge clk);
+									@(posedge clk);
+									@(posedge clk);
 		SW[3] <= 0;				@(posedge clk);
 		SW[1]	<= 1;				@(posedge clk);
 									@(posedge clk);
 		KEY[2] <= 0;			@(posedge clk);
 									@(posedge clk);
-		for(i = 0; i <480; i++) begin
+		for(i = 0; i <475; i++) begin
 			@(posedge clk);
 		end
 									@(posedge clk);
 									
+		SW[2]	<= 1;				@(posedge clk);
+									@(posedge clk);
+									@(posedge clk);
+		SW <= 10'b0000010001;			@(posedge clk);
+		for(i = 0; i <300; i++) begin
+			@(posedge clk);
+		end
+		SW<= 10'b0000010100; @(posedge clk);
+		for(i = 0; i <33; i++) begin
+			@(posedge clk);
+		end
+		SW <= 10'b0000010111;			@(posedge clk);
+									@(posedge clk);
+									@(posedge clk);
+		SW <= 10'b0000010011;			@(posedge clk);
+		KEY[1] <= 0; KEY[2] <= 1;
+		for(i = 0; i <510; i++) begin
+			@(posedge clk);
+		end
+		SW <= 10'b0000011011;			@(posedge clk);
+		@(posedge clk);
+		@(posedge clk);
+		@(posedge clk);@(posedge clk);
 		$stop; // End the simulation.
 	end
 endmodule
