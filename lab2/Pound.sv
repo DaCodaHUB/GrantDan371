@@ -7,6 +7,21 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 	//boolean flag values
 	integer resetFlag, stateLevelHigh, stateLevelLow, stateIncreasingWater, stateDecreasingWater, stateArriving, stateDeparting;
 	
+	//INITIALIAZE Hex displays
+	initial begin
+	HEX3 = 7'b1111111;
+	end
+	
+	//METASTABILITY for user inputs
+	logic METAwaterUp, METAwaterDown, METAarriving, METAdeparting, METAoutsideLock, METAinsideLOCK, METAswitchDirection;
+	DFlipFlop waterUpFF(KEY[1], METAwaterUp, reset, CLOCK_50);
+	DFlipFlop waterDownFF(KEY[2], METAwaterDown, reset, CLOCK_50);
+	DFlipFlop arrivingFF(SW[0], METAarriving, reset, CLOCK_50);
+	DFlipFlop departingFF(SW[1], METAdeparting, reset, CLOCK_50);
+	DFlipFlop outsideLockFF(SW[2], METAoutsideLock, reset, CLOCK_50);
+	DFlipFlop insideLockFF(SW[3], METAinsideLOCK, reset, CLOCK_50);
+	DFlipFlop switchDirectionFF(SW[4], METAswitchDirection, reset, CLOCK_50);
+		
 	//reset control
 	logic reset;
 	
@@ -19,7 +34,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 
 	//Clock setup
 	parameter whichClock = 0;
-	logic clk;
+	logic [31:0]clk;
 	clock_divider cdiv1 (CLOCK_50, clk);
 	
 	//ledControl
@@ -87,8 +102,8 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 	//HEX control for waterLevel while increasing
 	integer feetOnes, feetDecimal;
 
-	assign feetOnes = 105 * waterLevelHeight / 10000;
-	assign feetDecimal = ((105 * waterLevelHeight) % 10000)/1000;
+	assign feetOnes = waterLevelHeight / 11200;
+	assign feetDecimal = ((waterLevelHeight/1120) % 10);
 	
 	always_comb
 		case (feetOnes)
@@ -168,7 +183,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 		if(stateLevelLow == 1) begin //ledControl
 			ledState <= 4'b1000;
 		end
-		if(stateLevelLow == 1 && SW[0]) begin //turn on stateIncreasingWater and stateArriving
+		if(stateLevelLow == 1 && METAarriving) begin //turn on stateIncreasingWater and stateArriving
 			ledState <= 4'b1101;
 			stateLevelLow <= 0;
 			stateIncreasingWater <= 1;
@@ -177,20 +192,20 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 			timeCounter <= 300;
 			muxHexSel <= 7'b0000000;
 		end
-		if(stateIncreasingWater == 1) begin //waterlevelcontrol ON until 4.7 height
-			if (waterLevelHeight == 480)
-				waterLevelHeight <= 480;
-			else if (~KEY[1] && ~KEY[2])
+		if(~METAinsideLOCK && ~METAoutsideLock) begin //waterlevelcontrol ON until 4.7 height or 0.3 height
+			if (waterLevelHeight > 56000)
+				waterLevelHeight <= 56000;
+			else if (~METAwaterUp && ~METAwaterDown)
 				waterLevelHeight <= waterLevelHeight;
 			else begin
-				if (~KEY[1])begin
-					waterLevelHeight <= waterLevelHeight + 1;
+				if (~METAwaterUp)begin
+					waterLevelHeight <= waterLevelHeight + 112;
 				end
-				if (~KEY[2] && waterLevelHeight == 0)begin
+				if (~METAwaterDown && waterLevelHeight == 0)begin
 					waterLevelHeight <= 0;
 				end	
-				if (~KEY[2] && waterLevelHeight != 0)begin
-					waterLevelHeight <= waterLevelHeight - 1;
+				if (~METAwaterDown && waterLevelHeight != 0)begin
+					waterLevelHeight <= waterLevelHeight - 127;
 				end					
 			end
 		end
@@ -209,18 +224,18 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 				timeCounter <= timeCounter - 1;		
 		end
 		//WATER HIGH && ARRIVING BOAT
-		if(450 < waterLevelHeight && waterLevelHeight <481 && SW[3] && stateArriving) begin
+		if(450 < waterLevelHeight && waterLevelHeight <481 && METAinsideLOCK && stateArriving) begin
 			ledState <= 4'b0101;
 			waterLevelHeight <= 480;
 			//open or close lock
 		end
-		if(450 < waterLevelHeight && waterLevelHeight < 481 && ~SW[3] && stateArriving) begin
+		if(450 < waterLevelHeight && waterLevelHeight < 481 && ~METAinsideLOCK && stateArriving) begin
 			ledState <= 4'b1101;
 			boatInLock <= 1;
 			//open or close lock
 		end
 		if (boatInLock == 1) begin
-			if(SW[1] && ~SW[3]) begin //DECREASINGWATER state and stateDeparting
+			if(METAdeparting && ~METAinsideLOCK) begin //DECREASINGWATER state and stateDeparting
 				stateDecreasingWater <= 1;
 				stateDeparting <= 1;
 				stateIncreasingWater <= 0;
@@ -233,21 +248,21 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 		if(stateDecreasingWater == 1) begin //waterlevelcontrol ON until 4.7 height
 			if (waterLevelHeight == 421)
 				waterLevelHeight <= 420;
-			else if (~KEY[1] && ~KEY[2])
+			else if (~METAwaterUp && ~METAwaterDown)
 				waterLevelHeight <= waterLevelHeight;
 			else begin
-				if (~KEY[1])begin
+				if (~METAwaterUp)begin
 					waterLevelHeight <= waterLevelHeight + 1;
 				end
-				if (~KEY[2] && waterLevelHeight == 0)begin
+				if (~METAwaterDown && waterLevelHeight == 0)begin
 					waterLevelHeight <= 0;
 				end	
-				if (~KEY[2] && waterLevelHeight != 0)begin
+				if (~METAwaterDown && waterLevelHeight != 0)begin
 					waterLevelHeight <= waterLevelHeight - 1;
 				end
 			end
 		end
-		if(0 < waterLevelHeight && waterLevelHeight <26 && SW[2] && stateDeparting) begin
+		if(0 < waterLevelHeight && waterLevelHeight <26 && METAoutsideLock && stateDeparting) begin
 			ledState <= 4'b1000;
 			waterLevelHeight <= 480;
 			stateDecreasingWater <= 0;
@@ -255,12 +270,12 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 			boatInLock <= 0;
 			//open or close lock
 		end
-		if(0 < waterLevelHeight && waterLevelHeight < 26 && ~SW[2] && stateDeparting) begin
+		if(0 < waterLevelHeight && waterLevelHeight < 26 && ~METAoutsideLock && stateDeparting) begin
 			ledState <= 4'b1100;
 			//open or close lock
 		end
-		//if (SW[0] && waterLevelHigh == 1)
-		//if (SW[0] && waterLevelLow == 1)
+		//if (METAarriving && waterLevelHigh == 1)
+		//if (METAarriving && waterLevelLow == 1)
 		end
 endmodule
 
