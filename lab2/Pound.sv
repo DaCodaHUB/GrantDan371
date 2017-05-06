@@ -29,7 +29,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 	integer waterLevelHeight;
 
 	//Clock setup
-	parameter whichClock = 21;
+	parameter whichClock = 20;
 	logic [31:0]clk;
 	clock_divider cdiv1 (CLOCK_50, clk);
 	
@@ -229,7 +229,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 				end
 			end
 			else if (arrivingFlag2 == 1) begin //BOAT LEAVING (LOW TO HIGH)
-				if(arrivingFlag2 == 1) begin
+				if(arrivingFlag2 == 1 && boatDockedState) begin
 					LEDR[1] <= 1'b0;
 					boatDockedState <= 0;
 					arrivingFlag2 <= 0;
@@ -256,7 +256,7 @@ module Pound (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 		
 		//WaterLevel LOW state Begin
 		if(waterLevelLow == 1) begin
-			if (arrivingFlag == 1) begin //Boat is departing (HIGH TO LOW)
+			if (arrivingFlag == 1 && boatDockedState) begin //Boat is departing (HIGH TO LOW)
 				if(arrivingFlag == 1) begin
 					LEDR[1] <= 1'b0;
 					boatDockedState <= 0;
