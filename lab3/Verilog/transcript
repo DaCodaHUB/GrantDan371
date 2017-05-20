@@ -1,0 +1,48 @@
+# Reading C:/altera/14.0/modelsim_ase/tcl/vsim/pref.tcl 
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module Buffer
+# -- Compiling module Buffer_Testbench
+# 
+# Top level modules:
+# 	Buffer_Testbench
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module clock_divider
+# 
+# Top level modules:
+# 	clock_divider
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module mux2_1
+# -- Compiling module mux2_1_testbench
+# 
+# Top level modules:
+# 	mux2_1_testbench
+# Model Technology ModelSim ALTERA vlog 10.1e Compiler 2013.06 Jun 12 2013
+# -- Compiling module DFlipFlop
+# -- Compiling module DFF_testbench
+# 
+# Top level modules:
+# 	DFF_testbench
+# vsim -lib work -voptargs=\"+acc\" -t 1ps Buffer_Testbench 
+# Loading sv_std.std
+# Loading work.Buffer_Testbench
+# Loading work.Buffer
+# Loading work.DFlipFlop
+# Loading work.clock_divider
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: Grant  Hostname: DESKTOP-8D53D39  ProcessID: 11664
+# 
+#           Attempting to use alternate WLF file "./wlftahetka".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlftahetka
+# 
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# Break in Module Buffer_Testbench at ./Buffer.sv line 268
+# Simulation Breakpoint: Break in Module Buffer_Testbench at ./Buffer.sv line 268
+# MACRO ./runlab.do PAUSED at line 28
