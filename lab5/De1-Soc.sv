@@ -1585,7 +1585,7 @@ module DE1_SoC (CLOCK_50, KEY, LEDR, SW, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, GPI
 											rgb[15:8] <= 8'hef /4;
 											rgb[7:0] <= 8'hea /4;
 										end
-									if (VGA_RLC_out[1] == 1'b1) // 1 SOC gameplay WHITE: f2efea orange: ffa220
+									if (VGA_RLC_out[1] == 1'b0) // 1 SOC gameplay WHITE: f2efea orange: ffa220
 										begin
 										//draw 2nd electron ---------------------------------
 											if(x > 290 + 60 && x < 295 + 60  && y > 320 && y <= 360)
