@@ -296,59 +296,100 @@ void Initialise() {
 }
 
 
-short nextState (short position) {
+int nextState (int position) {
 	if (position >= 0 && position < 25 && dice_number > 0) {
 		 position = position + 1;
 		 dice_number = dice_number - 1;
+		 if (gameFlag == 2) {
+			 outputPosition(position);
+		 }
 	} else if (position == 1 && dice_number == 0) {
 		position = 16;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 5 && dice_number == 0) {
 		position = 12;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 10 && dice_number == 0) {
 		position = 7;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 14 && dice_number == 0) {
 		position = 3;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 15 && dice_number == 0) {
 		position = 20;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 17 && dice_number == 0) {
 		position = 0;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 19 && dice_number == 0) {
 		position = 16;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 22 && dice_number == 0) {
 		position = 13;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 24 && dice_number == 0) {
 		position = 11;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
-	} else if (position == 26 && dice_number == 0) {
-		position = 27;
-	} else if (position == 27 && dice_number == 0) {
-		position = 28;
-	} else if (position == 28 && dice_number == 0) {
-		position = 29;
-	} else if (position == 29 && dice_number == 0) {
-		position = 30;
+	} else if (position >= 26 && position < 30 && dice_number == 0) {
+		position = position + 1;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 	} else if (position == 30 && dice_number == 0) {
 		position = 0;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 26 && dice_number == 1) {
 		position = 31;
 		dice_number = dice_number - 1;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 	} else if (position == 31 && dice_number == 0) {
 		position = 32;
+		if (gameFlag == 2) {
+			outputPosition(position);
+		}
 		moving = false;
 	} else if (position == 25) {
-		if (dice_counter <= 2) {
+		if (dice_number == 2 || dice_number == 1) {
 			position = position + 1;
 			dice_number = dice_number - 1;
+			if (gameFlag == 2) {
+				outputPosition(position);
+			}
 		}
+	} else {
+		moving = false;
 	}
 
 	return position;
