@@ -178,7 +178,7 @@ int main () {
 						dice_counter = 0;
 						moving = true;
 						dice_rolling = false;
-						dice_number = dice_counter % 4;
+						dice_number = dice_counter % 4 + 1;
 					} else
 						dice_counter++;
 
