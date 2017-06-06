@@ -156,22 +156,14 @@ int main () {
 				if (!schematic) {
 					schematic = key1(schematic);
 				} else {
-					alt_printf("running schematic");
+					//alt_printf("running schematic");
 					// Rolling dice
 					if (dice_counter == 0 && !moving) {
-						if (player1) {
-							dice_rolling = key1(dice_rolling);
-						} else {
-							dice_rolling = key2(dice_rolling);
-						}
+						dice_rolling = key1(dice_rolling);
 						alt_printf("%x\n", dice_rolling);
 					}
 					if (dice_rolling) {
-						if (player1) {
-							stopDice = key1(stopDice);
-						} else {
-							stopDice = key2(stopDice);
-						}
+						stopDice = key2(stopDice);
 						alt_printf("%x\n", stopDice);
 					}
 					if (stopDice) {
